@@ -18,6 +18,20 @@
     <!-- Umami Analytics -->
     <script defer src="https://cloud.umami.is/script.js" data-website-id="ae1ab58d-f43e-4d34-aad2-523ee790a32b"></script>
     
+    <!-- Vercel Web Analytics -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="https://cdn.vercel-insights.com/v1/script.debug.js"></script>
+    <script>
+      // Sayfa yüklendiğinde analytics'i başlat
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.va) {
+          window.va('track', 'pageview');
+        }
+      });
+    </script>
+    
     <script defer="defer" src="main.e7c7970a12833611eb02.js"></script>
     <link href="main.40f27e161ba829c32fbb.css" rel="stylesheet" />
   </head>

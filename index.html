@@ -22,12 +22,61 @@
     <script>
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
-    <script defer src="https://cdn.vercel-insights.com/v1/script.debug.js"></script>
+    <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
     <script>
+      // Custom event tracking fonksiyonları
+      function trackCustomEvent(eventName, properties = {}) {
+        if (window.va) {
+          window.va('track', eventName, properties);
+        }
+      }
+
       // Sayfa yüklendiğinde analytics'i başlat
       document.addEventListener('DOMContentLoaded', function() {
+        // Sayfa görüntüleme takibi (otomatik)
         if (window.va) {
           window.va('track', 'pageview');
+        }
+
+        // Proje linklerine tıklama takibi
+        const projectLinks = document.querySelectorAll('a[href*="vercel.app"], a[href*="github.com"]');
+        projectLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            const projectName = this.closest('.project')?.querySelector('.project__title')?.textContent || 'Unknown Project';
+            trackCustomEvent('project_click', {
+              project_name: projectName,
+              project_url: this.href
+            });
+          });
+        });
+
+        // İletişim formu gönderimi takibi
+        const contactForm = document.querySelector('.contact__form');
+        if (contactForm) {
+          contactForm.addEventListener('submit', function() {
+            trackCustomEvent('contact_form_submit');
+          });
+        }
+
+        // Sosyal medya linklerine tıklama takibi
+        const socialLinks = document.querySelectorAll('.socials a');
+        socialLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            const platform = this.href.includes('github') ? 'github' : 'email';
+            trackCustomEvent('social_click', {
+              platform: platform
+            });
+          });
+        });
+
+        // Dil değiştirme takibi
+        const languageLink = document.querySelector('a[href="./english.html"]');
+        if (languageLink) {
+          languageLink.addEventListener('click', function() {
+            trackCustomEvent('language_switch', {
+              language: 'english'
+            });
+          });
         }
       });
     </script>

@@ -1,0 +1,11 @@
+{
+  "name": "oguzhanbaysal-portfolio",
+  "version": "1.0.0",
+  "description": "Oğuzhan Baysal Portfolio Website",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "build": "echo 'Build completed'"
+  }
+}

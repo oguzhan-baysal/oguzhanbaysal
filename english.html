@@ -24,7 +24,7 @@
     (function() {
       var script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@1/dist/index.js';
-      script.async = true;
+      script.type = 'module';
       script.onload = function() {
         if (window.injectSpeedInsights) {
           window.injectSpeedInsights();
